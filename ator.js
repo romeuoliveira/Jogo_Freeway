@@ -1,11 +1,20 @@
 //  codigo ator
 let xAtor = 125;
-let yAtor = 415;
+let yAtor = 419;
 let colisao = false;
 let meusPontos = 0;
+let maxPontos = 'Max Score';
+let maxScore = 0;
 
 function mostraAtor(){
-   image(imagemDoAtor , xAtor, yAtor, 30, 30);
+   image(imagemDoAtor , xAtor, yAtor, 29, 29);
+  
+    //rect (125,419, 30, 30) 
+    //fill(color(0))
+    //circle (125,419, 10);
+    
+    
+    //ellipse(125,419, 30, 30)
 }
 
 function movimentaAtor(){
@@ -18,14 +27,25 @@ function movimentaAtor(){
     }    
   }
 }
+
+function movimentoLateralDoAtor(){
+  if (keyIsDown(RIGHT_ARROW)){
+    xAtor += 3;
+  }
+  if (keyIsDown(LEFT_ARROW)){
+    xAtor -=3;
+  }
+}
+
+
 function verificaColisao(){
      //collideRectCircle(x1, y1, width1, height1, cx, cy, diameter)
    for ( let i = 0; i < imagemCarros.length; i++){
-     colisao = collideRectCircle ( xCarros[i], yCarros[i], comprimentoCarro, alturaCarro, xAtor, yAtor, 15)
+     colisao = collideRectCircle ( xCarros[i], yCarros[i], comprimentoCarro, alturaCarro, xAtor, yAtor,10 )
      if (colisao){
        atorVoltaPosicaoInicial();
        somDaColisao.play();
-       if (pontosMaiosQueZero()){
+       if (pontosMaiorQueZero()){
           meusPontos -= 1; 
         }
       }
@@ -33,36 +53,55 @@ function verificaColisao(){
   }
 
 function atorVoltaPosicaoInicial(){
-  yAtor = 415;
+  yAtor = 420;
 }
-
-function incluiPontos(){
+function marcaPonto(){
+  if(yAtor < 15){
+    meusPontos++;
+    somDoPonto.play();
+    atorVoltaPosicaoInicial();
+  }
+}
+//placar pontos normal
+function placar(){
+  stroke(0);
   textAlign(CENTER);
   textSize(28);
   fill(color(119,136,153));
   rect (160,8, 40, 25, 5);
   fill(color(0));
-  stroke(0);
-  text(meusPontos, 180, 30.5);
+  text(meusPontos, 180, 30.2);
 }
+ //placar acumulado sem colidir
+ function placarRecorde(){
+  textAlign(CENTER);
+  textSize(25);
+  fill(color(255));
+  rect (480,8, 110, 25, 5);
+  fill(color(255,0,0));
+  stroke(255);
+  text( maxScore, 573, 29.2);
 
-function marcaPontos(){
-  if(yAtor < 30){
-    meusPontos += 1;
-    somDoPonto.play();
-    atorVoltaPosicaoInicial();
+   //mostra maxScore
+  textAlign(CENTER);
+  textSize(14);
+  text(maxPontos , 525, 26)
+
   }
-}
 
-function pontosMaiosQueZero(){
+function acumulaPontos(){
+  if(yAtor < 20  && 
+     maxScore == meusPontos){
+        maxScore++;
+  }
+}  
+
+
+function pontosMaiorQueZero(){
   return meusPontos > 0;
 }
 
 function podeSeMover(){
   return yAtor < 415;
 }
-
-
-
-
 

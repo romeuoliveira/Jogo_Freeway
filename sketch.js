@@ -3,7 +3,7 @@
 
 function setup() {
   createCanvas(600, 450);
-  somDaTrilha.loop();
+  //somDaTrilha.loop();
 }
 
 function draw() {
@@ -12,19 +12,15 @@ function draw() {
   mostraCarro();
   movimentaCarro();
   movimentaAtor();
+  movimentoLateralDoAtor();
   voltaPosicaoInicialDoCarro();
   verificaColisao();
-  incluiPontos();
-  marcaPontos();
-}
+  placar();
+  placarRecorde();
+  acumulaPontos();
+  marcaPonto();
+  
+} 
 
 
-
-
-
-
-
-
-
-
-
+ 
