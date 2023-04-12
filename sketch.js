@@ -6,6 +6,7 @@ function setup() {
   somDaTrilha.loop();
 }
 
+
 function draw() {
   background(imagemDaEstrada);
   mostraAtor();
@@ -19,7 +20,7 @@ function draw() {
   placarRecorde();
   acumulaPontos();
   marcaPonto();
-  
+
 } 
 
 
